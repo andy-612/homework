@@ -8,11 +8,13 @@ display_width = 800
 display_height = 600
 
 black = (0, 0, 0)
-white = (255, 255, 255)q
-red = (255, 0, 0)
-green=(0, 255, 0)
-
+white = (255, 255, 255)
+red = (200, 0, 0)
+green=(0, 200, 0)
 block_color = (53, 115, 255)
+
+bright_red = (255, 0, 0)
+bright_green=(0, 255, 0)
 
 car_width = 73
 
@@ -75,8 +77,22 @@ def game_intro():
         TextRect.center = ((display_width / 2), (display_height / 2))
         gameDisplay.blit(TextSurf, TextRect)
 
-        pygame.draw.rect(gameDisplay, green, (50, 450, 100, 50))
+        mouse= pygame.mouse.get_pos()
+
+        #print(mouse)
+
+        if 150 + 100 > mouse[0] > 150 and 450 + 50 > mouse[1] > 450:
+            pygame.draw.rect(gameDisplay, bright_green, (150, 450, 100, 50))
+        else:
+            pygame.draw.rect(gameDisplay, green, (150, 450, 100, 50))
+
+        smallText = pygame.font.Font("freesansbold.ttf", 20)
+        textSurf, textRect = text_objects("RACE!", smallText)
+        textRect.center = ((150 + (100 / 2)), (450 + (50 / 2)))
+        gameDisplay.blit(textSurf, textRect)
+
         pygame.draw.rect(gameDisplay, red, (550, 450, 100, 50))
+
 
         pygame.display.update()
         clock.tick(15)
